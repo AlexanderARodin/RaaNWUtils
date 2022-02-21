@@ -11,7 +11,7 @@ import Network
 //	//	//	//	//	//	//	//
 
 
-func sendData( _ data: Data?, on connection: NWConnection, informInMain: ((_ endpoint: NWEndpoint, _ error: NWError?) -> Void)? = nil) {
+public func sendData( _ data: Data?, on connection: NWConnection, informInMain: ((_ endpoint: NWEndpoint, _ error: NWError?) -> Void)? = nil) {
 	let endpoint = connection.endpoint
 	connection.send(content: data, completion: NWConnection.SendCompletion.contentProcessed(({ (NWError) in
 		DispatchQueue.main.async {
@@ -20,7 +20,7 @@ func sendData( _ data: Data?, on connection: NWConnection, informInMain: ((_ end
 	})))
 }
 
-func receiveData(on connection: NWConnection, informInMain: @escaping (_ endpoint: NWEndpoint, _ data: Data?, _ error: NWError?) -> Void) {
+public func receiveData(on connection: NWConnection, informInMain: @escaping (_ endpoint: NWEndpoint, _ data: Data?, _ error: NWError?) -> Void) {
 	let endpoint = connection.endpoint
 	connection.receiveMessage { (data, context, isComplete, error) in
 		DispatchQueue.main.async {
@@ -30,7 +30,7 @@ func receiveData(on connection: NWConnection, informInMain: @escaping (_ endpoin
 }
 
 
-class MainCoder {
+open class MainCoder {
 	static private let encoder = JSONEncoder()
 	static private let decoder = JSONDecoder()
 	private init(){}
