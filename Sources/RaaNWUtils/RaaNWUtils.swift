@@ -35,10 +35,10 @@ open class MainCoder {
 	static private let decoder = JSONDecoder()
 	private init(){}
 	
-	static func decode<T>(_ type: T.Type, from data: Data) -> T? where T : Decodable {
+	public static func decode<T>(_ type: T.Type, from data: Data) -> T? where T : Decodable {
 		try? decoder.decode(T.self, from: data)
 	}
-	static func encode<T>(_ value: T) -> Data? where T : Encodable {
+	public static func encode<T>(_ value: T) -> Data? where T : Encodable {
 		try? encoder.encode(value)
 	}
 }
